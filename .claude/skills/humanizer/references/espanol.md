@@ -4,6 +4,8 @@ Read this when the text is in Spanish. The patterns in `SKILL.md` apply as writt
 
 If a brand or voice guide is active (for example a brand skill with vetoed words or a set tone), apply it as well. On word choice and tone, the brand guide wins.
 
+**Brand taglines.** Official taglines such as «No intermediamos. Representamos.» or «Yo no espero al resultado. Lo busco.» are fixed brand assets, not tells to fix. Use them verbatim, at most one per piece, and never as a template for new sentences. A new contrast is fine only when its negative half corrects a belief the reader actually holds (§1), such as that an agent works for the commission; one per piece at most, and a tagline counts as that one.
+
 ## Where Spanish rules differ
 
 - **§8 Rayas.** Spanish uses the raya (—) correctly for dialogue and for paired asides: «La casa —reformada en 2019— tiene tres dormitorios». Keep those. The tell is the English habit: a single unpaired dash joining two clauses mid-sentence («La casa tiene tres dormitorios — y una terraza enorme»), or dashes in most sentences. Replace those with a comma, a colon, a period, or parentheses. En dashes (–) used as rayas are also a tell.

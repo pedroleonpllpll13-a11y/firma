@@ -56,6 +56,9 @@ RULES = [
      r"\bno (es|son|era|fue|será) (solo|sólo|solamente|simplemente|únicamente|un[ao]?)\b[^.?!\n]{0,90}[,;:—–]\s*(es|son|era|sino)\b", I, "es"),
     (STRONG, 1, "no-solo-sino contrast", r"\bno (solo|sólo|solamente)\b[^.?!\n]{0,110}\bsino\b", I, "es"),
     (STRONG, 1, "no-se-trata-de contrast", r"\bno se trata (solo |sólo )?de\b[^.?!\n]{0,90}\bsino\b", I, "es"),
+    (STRONG, 1, "clipped negative tail (, no X.)", r",\s+no\s+(para\s+|por\s+)?[\wáéíóúñ]+[^,.;:?!\n]{0,30}[.!]", I, "es"),
+    (STRONG, 1, "paired 'hay X que… y hay X que…'", r"\bhay\s+[\wáéíóúñ]+\s+que\b[^.?!\n]{0,80}[.]\s+y\s+hay\b", I, "es"),
+    (STRONG, 1, "clipped negative tail (, not X.)", r",\s+not\s+(for\s+|by\s+)?\w+[^,.;:?!\n]{0,30}[.!]", I, "en"),
     (STRONG, 1, "más-que-X-es-Y contrast", r"\bmás que (un|una)\b[^.?!\n]{0,60}[,;:]\s*(es|son)\b", I, "es"),
 
     # §2 closers and section summaries
@@ -153,6 +156,9 @@ AI_WORDS = {
           r"sin precedentes|innovador(a|es)?",
 }
 
+# Openers that restate after a negation: "No es un destino. Es una decisión."
+COPULA_START = {"es", "son", "era", "fue", "será", "it's", "it", "they're", "that's", "this", "we're"}
+
 SPANISH_HINTS = re.compile(
     r"\b(el|la|los|las|que|de|del|y|en|con|para|por|una|es|está|son|muy|pero|como|más)\b", I)
 ENGLISH_HINTS = re.compile(r"\b(the|and|of|to|is|in|that|with|for|are|this|it)\b", I)
@@ -199,6 +205,23 @@ def scan(text, lang):
         for n, line in enumerate(raw_lines if use_raw else no_urls, 1):
             for m in rx.finditer(line):
                 findings.append((sev, sec, label, n, snippet(line, m.start(), m.end())))
+
+    # §1 split contrast: a negated sentence followed by a short affirmative one
+    # ("Algunas propiedades no se anuncian. Se presentan.").
+    neg = {"es": re.compile(r"\bno\b|\bnunca\b", I),
+           "en": re.compile(r"\bnot\b|n't\b|\bnever\b", I)}[lang]
+    for n, line in enumerate(no_urls, 1):
+        sents = [s for s in re.split(r"(?<=[.!?])\s+", line.strip()) if s]
+        for a, b in zip(sents, sents[1:]):
+            m = neg.search(a)
+            if not m or neg.search(b) or len(b.split()) > 7 or len(a.split()) > 14:
+                continue
+            after = re.findall(r"[\w'áéíóúñ]+", a[m.end():].lower())
+            first = (re.findall(r"[\w'áéíóúñ]+", b.lower()) or [""])[0]
+            echoes = (first in COPULA_START or (after and first == after[0])
+                      or any(len(w) >= 5 and w[:5] == first[:5] for w in after))
+            if echoes:
+                findings.append((STRONG, 1, "split contrast (No X. Y.)", n, (a + " " + b)[:90]))
 
     # §8 dashes. Spanish keeps paired rayas and dialogue rayas.
     for n, line in enumerate(no_urls, 1):

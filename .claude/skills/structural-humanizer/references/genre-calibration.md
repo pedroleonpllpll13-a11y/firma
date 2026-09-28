@@ -40,15 +40,19 @@ tidy wrap-up.
 
 ## Property descriptions and listings
 
-Facts first. The reader is scanning, not reading a story. The structural tells here are
-the stated lesson ("una oportunidad única para quienes buscan…"), the setting painted
-as a mood ("donde la luz del atardecer abraza cada rincón"), and vagueness.
+Both brand guides ask for the life before the square metres, so keep that order. The
+tell is a life built from generic atmosphere instead of this house. The structural
+tells here are the stated lesson ("para quienes entienden el valor de…"), the setting
+painted as a mood ("el silencio, la luz y la amplitud te dicen todo"), and vagueness.
 
-- Every claim a fact from the ficha: m², orientation, year, bedrooms, the named place
-  and the minutes to it, what the view actually shows.
-- No lifestyle moral at the end. Stop on the last useful fact or the next step.
-- Setting as mirror (audit 3's cousin): cut the atmosphere unless it is specific and
-  true ("se oye el mar desde el dormitorio principal").
+- Build the life from facts of this property: where the light comes in and when, what
+  the terrace looks at, the minutes to the named club or school, the real routine the
+  layout allows ("la luz entra por el este toda la mañana y la piscina queda siempre a
+  la vista desde el salón").
+- One sensory detail, and only one that is true of this house ("se oye el mar desde el
+  dormitorio principal"). Drop the rest of the atmosphere.
+- No lifestyle moral at the end. Close on a fact or the next step ("Visitas con cita
+  previa.").
 - Skip: tangents, time jumps, reader-address gimmicks. Pass 1 matters more here.
 
 ## Client emails and WhatsApp messages
